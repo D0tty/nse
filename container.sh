@@ -23,7 +23,7 @@ done
 # DL conteneur
 if [ ! -f "$archive" ]; then
     echo "Downloading fish container..."
-    wget bit.ly/fish-container -O fish.tar
+    wget -nv bit.ly/fish-container -O fish.tar
 else
     echo "Fish container already exists, skipping."
 fi
