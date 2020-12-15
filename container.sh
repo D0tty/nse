@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # vars
+url="bit.ly/fish-container"
 archive="fish.tar"
-rootcontainer="container-root"
+rootdir="container-root"
 
 
 # libcgroup
@@ -23,14 +24,18 @@ done
 # DL conteneur
 if [ ! -f "$archive" ]; then
     echo "Downloading fish container..."
-    wget -nv bit.ly/fish-container -O fish.tar
+    wget -nv "$url" -O "$archive"
 else
-    echo "Fish container already exists, skipping."
+    echo "Archive $(realpath $archive) already exists, skipping."
 fi
 
 # dir setup
-mkdir -p "$rootcontainer" && cd "$rootcontainer"
-tar -xf "../$archive"
+if [ ! -d "$rootdir" ]; then
+    mkdir -p "$rootdir" && cd "$rootdir"
+    tar -xf "../$archive"
+else
+    echo "Container $(realpath $rootdir) already exists, skipping."
+fi
 
 # control group setup
 cgroup_id="cgroup_$(shuf -i 1000-2000 -n 1)"
