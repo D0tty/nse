@@ -33,11 +33,13 @@ fi
 
 # dir setup
 if [ ! -d "$rootdir" ]; then
-    mkdir -p "$rootdir" && cd "$rootdir"
-    tar -xf "../$archive"
+    mkdir -p "$rootdir"
+    tar -xf "$archive" -C "$rootdir"
 else
     echo "Container $(realpath $rootdir) already exists, skipping."
 fi
+
+cd "$rootdir"
 
 # control group setup
 cgroup_id="cgroup_$(shuf -i 1000-2000 -n 1)"
