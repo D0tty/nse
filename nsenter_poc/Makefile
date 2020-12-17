@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -O0 -g3
 CPPFLAGS = -D_GNU_SOURCE
 
-all: mini_nsenter
+all: mini_nsenter mini_nsenter_fork
 
 mini_nsenter:
 
