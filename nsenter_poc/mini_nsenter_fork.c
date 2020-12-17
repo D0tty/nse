@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
+#include <sys/wait.h>
 
 #define NS_NB 5
 #define STR_MAX 1024
@@ -137,6 +138,16 @@ void exec_command(char *cmd, char *args[], char *env[]) {
     }
 }
 
+void spawn_in_ns(char *cmd, char *args[], char *env[]) {
+    pid_t f_pid = fork();
+    if (f_pid == 0) { // in child
+        exec_command(cmd, args, env);
+    }
+    else {
+        waitpid(f_pid, NULL, 0);
+    }
+}
+
 // argv[1] == pid argv[2+n] is command
 int main(int argc, char **argv) {
     (void) argc;
@@ -154,7 +165,7 @@ int main(int argc, char **argv) {
 
     change_root();
 
-    exec_command(cmd, args, envp);
+    spawn_in_ns(cmd, args, envp);
 
     return 0;
 }
