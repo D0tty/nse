@@ -6,8 +6,10 @@ int main(void)
 {
     size_t alloc = 1024 * 1024;
 
-    while(1)
+    for (size_t i = 0; ; i++)
     {
+        printf("Iteration %d\n", i);
+
         char* ptr = malloc(alloc);
         if (ptr == NULL)
         {
