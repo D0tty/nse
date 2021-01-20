@@ -1,2 +1,3 @@
 container-root
 fish.tar
+seccomp/seccomp
