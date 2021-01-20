@@ -1,0 +1,3 @@
+[submodule "capabilities_poc/capabilities-blog"]
+	path = capabilities_poc/capabilities-blog
+	url = https://github.com/ContainerSolutions/capabilities-blog.git
