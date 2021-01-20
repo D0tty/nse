@@ -1,1 +1,1 @@
-all: seccomp
+all: seccomp seccomp_advanced
