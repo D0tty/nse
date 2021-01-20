@@ -16,8 +16,8 @@ memory="$((10 * 1024 * 1024))"
 
 [[ "$#" -eq 1 ]] && memory="$1"
 
-# display bin
-cat "$test_bin"
+# display code
+cat "$test_bin".c
 # make test malloc
 make "$test_bin"
 cp "$test_bin" "/tmp/$test_bin"
@@ -45,9 +45,14 @@ read
 # add our shell in the cgroups procs
 echo "$$" > cgroup.procs
 cat cgroup.procs
+# pause
+read
 
 # add memory limit
 echo "$memory" > memory.limit_in_bytes
+cat memory.limit_in_bytes
+# pause
+read
 
 # execute
 /tmp/$test_bin
